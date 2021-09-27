@@ -39,10 +39,10 @@ namespace react_playground_backend
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseKestrel()
-                    .UseContentRoot(Directory.GetCurrentDirectory())
-                    .UseUrls("http://*:5000")
-                    .UseIISIntegration()
+                    // .UseKestrel()
+                    // .UseContentRoot(Directory.GetCurrentDirectory())
+                    // .UseUrls("http://*:5000")
+                    // .UseIISIntegration()
                     .UseStartup<Startup>();
                 });
     }

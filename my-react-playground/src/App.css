@@ -1,0 +1,15 @@
+.AppNavbar {
+    position: sticky;
+}
+
+.AppMain {
+    overflow-y: scroll;
+}
+
+.h-15p {
+    height: 15% !important;
+}
+
+.h-85p {
+    height: 85% !important;
+}

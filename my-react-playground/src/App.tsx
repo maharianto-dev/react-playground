@@ -6,11 +6,11 @@ import NavBar from './features/NavBar/NavBar';
 function App() {
   return (
     <div className="App h-100 d-flex flex-column">
-      <div className="w-100 h-25 d-flex flex-column">
+      <div className="AppNavbar w-100 h-15p d-flex flex-column">
         <NavBar />
       </div>
-      <div className="w-100 h-75 d-flex flex-column">
-        <div className="container-fluid">
+      <div className="AppMain container-fluid">
+        <div className="w-100 h-85p d-flex flex-column">
           <Main />
         </div>
       </div>
