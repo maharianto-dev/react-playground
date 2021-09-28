@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import counterReducer from '../features/counter/counterSlice';
 
-import testCollection1Reducer from './testCollection1/testCollection1.reducer';
+import backendAPIReducer from './backendAPI/backendAPI.reducer';
 
 const rootReducer = combineReducers({
-  testCollection1API: testCollection1Reducer,
+  backendAPI: backendAPIReducer,
   counter: counterReducer
 });
 

@@ -7,24 +7,24 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 import { createStructuredSelector } from 'reselect';
-import { fetchTestCollection1StartAsync } from '../../redux/testCollection1/testCollection1.actions';
+import { fetchBackendAPIDataStartAsync } from '../../redux/backendAPI/backendAPI.actions';
 import {
-  selectTestCollection1List,
-  selectIsTestCollection1ListFetching
-} from '../../redux/testCollection1/testCollection1.selector';
+  selectBackendAPIData,
+  selectIsBackendAPIFetching
+} from '../../redux/backendAPI/backendAPI.selector';
 import Loading from '../Loading/Loading';
 
 import styles from './TestCollection1.module.css';
 
 interface Props {
-  fetchTestCollection1StartAsync: any,
-  testCollection1List: any,
-  isTestCollection1Fetching: any
+  fetchBackendAPIDataStartAsync: any,
+  backendAPIData: any,
+  isFetching: any
 }
 
-const TestCollection1: FC<Props> = ({ fetchTestCollection1StartAsync, testCollection1List, isTestCollection1Fetching }) => {
+const TestCollection1: FC<Props> = ({ fetchBackendAPIDataStartAsync, backendAPIData, isFetching }) => {
   useEffect(() => {
-    fetchTestCollection1StartAsync('http://localhost:5000/TestCollection1');
+    fetchBackendAPIDataStartAsync('http://localhost:5000/TestCollection1');
   }, []);
 
   const renderTableHead = () => (
@@ -47,7 +47,7 @@ const TestCollection1: FC<Props> = ({ fetchTestCollection1StartAsync, testCollec
 
   const renderTableBody = () => (
     <tbody>
-      {testCollection1List.map((object: any, ii: number) => (
+      {backendAPIData.map((object: any, ii: number) => (
         (ii % 2 === 0) ? (
           <tr key={ii + 1}>
             {renderTableRow(object, ii)}
@@ -62,7 +62,7 @@ const TestCollection1: FC<Props> = ({ fetchTestCollection1StartAsync, testCollec
   );
 
   let table;
-  if (isTestCollection1Fetching) {
+  if (isFetching) {
     table = <Loading />;
   } else {
     table = (
@@ -95,12 +95,12 @@ const TestCollection1: FC<Props> = ({ fetchTestCollection1StartAsync, testCollec
 };
 
 const mapStateToProps = createStructuredSelector<any, any>({
-  testCollection1List: selectTestCollection1List,
-  isTestCollection1Fetching: selectIsTestCollection1ListFetching
+  backendAPIData: selectBackendAPIData,
+  isFetching: selectIsBackendAPIFetching
 });
 
 const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-  fetchTestCollection1StartAsync
+  fetchBackendAPIDataStartAsync
 }, dispatch);
 
 export default connect(
