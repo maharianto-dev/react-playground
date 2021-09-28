@@ -79,9 +79,11 @@ const TestCollection1: FC<Props> = ({ fetchTestCollection1StartAsync, testCollec
     <div className={`${styles.TestCollection1} flex flex-col`} data-testid="TestCollection1">
       {header}
       {table}
-      <button type="button" className="btn btn-primary btn-sm">
-        Add new person
-      </button>
+      <Link to="/testcollection1/add">
+        <button type="button" className="btn btn-primary btn-sm">
+          Add new person
+        </button>
+      </Link>
       &nbsp;
       <Link to="/">
         <button type="button" className="btn btn-primary btn-sm">
