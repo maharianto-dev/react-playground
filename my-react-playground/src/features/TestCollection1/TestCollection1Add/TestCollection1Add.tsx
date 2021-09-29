@@ -1,16 +1,24 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable object-shorthand */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addTestCollection1 } from '../../../redux/actions/addTestCollection1Actions';
 import styles from './TestCollection1Add.module.css';
 
+interface InsertedData {
+  id: string,
+  firstName: string,
+  lastName: string
+}
+
 const TestCollection1Add = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [insertedData, setInsertedData] = useState({} as InsertedData);
 
+  // eslint-disable-next-line no-unused-vars
   const { newData, isLoading, error } = useSelector(
     (state: any) => ({
       error: state.addTestCollection1.error,
@@ -18,6 +26,15 @@ const TestCollection1Add = () => {
       isLoading: state.addTestCollection1.loading
     })
   );
+
+  useEffect(() => {
+    setFirstName('');
+    setLastName('');
+  }, [insertedData]);
+
+  useEffect(() => {
+    setInsertedData((prevState) => ({ ...prevState, ...newData }));
+  }, [newData]);
 
   const dispatch = useDispatch();
 
@@ -37,14 +54,19 @@ const TestCollection1Add = () => {
       firstName: firstName,
       lastName: lastName
     };
-    console.log('error: ', error);
-    console.log('isLoading: ', isLoading);
-    console.log('newData: ', newData);
-    await submitData('http://localhost:5000/TestCollection1', sendValue).then((response: any) => {
-      console.log('response: ', response);
-    });
+    await submitData('http://localhost:5000/TestCollection1', sendValue);
     event.preventDefault();
   };
+
+  const notification = (
+    (Object.keys(insertedData).length > 0)
+      ? (
+        <h3>
+          {`Succesfully inserted ${insertedData.firstName} ${insertedData.lastName} with id: ${insertedData.id}`}
+        </h3>
+      )
+      : <></>
+  );
 
   const header = <h1>Add A New Person!</h1>;
 
@@ -108,6 +130,7 @@ const TestCollection1Add = () => {
     <>
       <div className={styles.TestCollection1Add} data-testid="TestCollection1Add">
         {header}
+        {notification}
         {form}
       </div>
     </>

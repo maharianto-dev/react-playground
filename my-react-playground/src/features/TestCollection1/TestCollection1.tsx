@@ -22,7 +22,6 @@ const TestCollection1 = () => {
 
   // const fetchGridData = async (url:string) => {
   //   const response = await dispatch(fetchTestCollection1(url));
-  //   console.log('response:', response);
   // };
 
   const fetchGrid = async () => {
@@ -34,8 +33,7 @@ const TestCollection1 = () => {
   }, [dispatch]);
 
   const onRefreshGrid = async () => {
-    await fetchGrid()
-      .then((response: any) => console.log(response));
+    await fetchGrid();
   };
 
   const renderTableHead = () => (

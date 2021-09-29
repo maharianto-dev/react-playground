@@ -24,7 +24,6 @@ export function addTestCollection1(url: string, body: any) {
 
     axios.post(url, body, { headers: { 'Context-Type': 'application/json' } })
       .then((response) => {
-        console.log('response: ', response);
         dispatch(addTestCollection1Success(response.data));
         return response;
       })
