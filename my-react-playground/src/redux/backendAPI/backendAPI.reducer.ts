@@ -26,6 +26,23 @@ export function backendAPIReducer(state = INITIAL_STATE, action: any) {
         isFetching: false,
         errorMessage: action.payload,
       };
+    case BackendAPIActionTypes.POST_BACKEND_API_START:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case BackendAPIActionTypes.POST_BACKEND_API_SUCCESS:
+      return {
+        ...state,
+        backendAPIData: action.payload,
+        isFetching: false,
+      };
+    case BackendAPIActionTypes.POST_BACKEND_API_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
+      };
     default:
       return state;
   }

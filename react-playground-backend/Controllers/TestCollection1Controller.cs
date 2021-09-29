@@ -27,9 +27,17 @@ namespace react_playground_backend.Controllers
             return await _testCollection1Service.Get();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetTestCollection1")]
         public async Task<ActionResult<TestCollection1>> GetById(string id) {
             return await _testCollection1Service.GetById(id);
+        }
+
+        [HttpPost]
+        public ActionResult<TestCollection1> Create(TestCollection1 testCollection1)
+        {
+            _testCollection1Service.Create(testCollection1);
+
+            return CreatedAtRoute("GetTestCollection1", new { id = testCollection1.Id.ToString() }, testCollection1);
         }
     }
 }

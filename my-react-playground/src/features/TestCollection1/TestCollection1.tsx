@@ -1,31 +1,35 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { FC, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-
-import { createStructuredSelector } from 'reselect';
-import { fetchBackendAPIDataStartAsync } from '../../redux/backendAPI/backendAPI.actions';
-import {
-  selectBackendAPIData,
-  selectIsBackendAPIFetching
-} from '../../redux/backendAPI/backendAPI.selector';
+import { fetchTestCollection1 } from '../../redux/actions/testCollection1Actions';
 import Loading from '../Loading/Loading';
 
 import styles from './TestCollection1.module.css';
 
-interface Props {
-  fetchBackendAPIDataStartAsync: any,
-  backendAPIData: any,
-  isFetching: any
-}
+const TestCollection1 = () => {
+  const dispatch = useDispatch();
 
-const TestCollection1: FC<Props> = ({ fetchBackendAPIDataStartAsync, backendAPIData, isFetching }) => {
+  const { testCollection1GridData, istestCollection1GridFetching, error } = useSelector(
+    (state: any) => ({
+      error: state.testCollection1.error,
+      testCollection1GridData: state.testCollection1.data,
+      istestCollection1GridFetching: state.testCollection1.loading
+    })
+  );
+
+  // const fetchGridData = async (url:string) => {
+  //   const response = await dispatch(fetchTestCollection1(url));
+  //   console.log('response:', response);
+  // };
+
   useEffect(() => {
-    fetchBackendAPIDataStartAsync('http://localhost:5000/TestCollection1');
-  }, []);
+    dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
+  }, [dispatch]);
+
+  const onRefreshGrid = () => dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
 
   const renderTableHead = () => (
     <thead>
@@ -47,7 +51,7 @@ const TestCollection1: FC<Props> = ({ fetchBackendAPIDataStartAsync, backendAPID
 
   const renderTableBody = () => (
     <tbody>
-      {backendAPIData.map((object: any, ii: number) => (
+      {testCollection1GridData.map((object: any, ii: number) => (
         (ii % 2 === 0) ? (
           <tr key={ii + 1}>
             {renderTableRow(object, ii)}
@@ -62,7 +66,10 @@ const TestCollection1: FC<Props> = ({ fetchBackendAPIDataStartAsync, backendAPID
   );
 
   let table;
-  if (isFetching) {
+  if (error) {
+    table = <h3>Error!</h3>;
+  }
+  if (istestCollection1GridFetching) {
     table = <Loading />;
   } else {
     table = (
@@ -79,6 +86,10 @@ const TestCollection1: FC<Props> = ({ fetchBackendAPIDataStartAsync, backendAPID
     <div className={`${styles.TestCollection1} flex flex-col`} data-testid="TestCollection1">
       {header}
       {table}
+      <button type="button" className="btn btn-primary btn-sm" onClick={onRefreshGrid}>
+        Refresh grid
+      </button>
+      &nbsp;
       <Link to="/testcollection1/add">
         <button type="button" className="btn btn-primary btn-sm">
           Add new person
@@ -94,16 +105,4 @@ const TestCollection1: FC<Props> = ({ fetchBackendAPIDataStartAsync, backendAPID
   );
 };
 
-const mapStateToProps = createStructuredSelector<any, any>({
-  backendAPIData: selectBackendAPIData,
-  isFetching: selectIsBackendAPIFetching
-});
-
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({
-  fetchBackendAPIDataStartAsync
-}, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TestCollection1);
+export default TestCollection1;
