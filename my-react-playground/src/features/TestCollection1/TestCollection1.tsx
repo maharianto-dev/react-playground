@@ -25,11 +25,18 @@ const TestCollection1 = () => {
   //   console.log('response:', response);
   // };
 
-  useEffect(() => {
+  const fetchGrid = async () => {
     dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
+  };
+
+  useEffect(() => {
+    fetchGrid();
   }, [dispatch]);
 
-  const onRefreshGrid = () => dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
+  const onRefreshGrid = async () => {
+    await fetchGrid()
+      .then((response: any) => console.log(response));
+  };
 
   const renderTableHead = () => (
     <thead>

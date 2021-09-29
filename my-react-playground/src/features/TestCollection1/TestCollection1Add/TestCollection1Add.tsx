@@ -40,10 +40,9 @@ const TestCollection1Add = () => {
     console.log('error: ', error);
     console.log('isLoading: ', isLoading);
     console.log('newData: ', newData);
-    await submitData('http://localhost:5000/TestCollection1', sendValue);
-    console.log('error: ', error);
-    console.log('isLoading: ', isLoading);
-    console.log('newData: ', newData);
+    await submitData('http://localhost:5000/TestCollection1', sendValue).then((response: any) => {
+      console.log('response: ', response);
+    });
     event.preventDefault();
   };
 
