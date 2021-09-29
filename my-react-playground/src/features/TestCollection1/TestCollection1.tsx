@@ -22,14 +22,19 @@ const TestCollection1 = () => {
 
   // const fetchGridData = async (url:string) => {
   //   const response = await dispatch(fetchTestCollection1(url));
-  //   console.log('response:', response);
   // };
 
-  useEffect(() => {
+  const fetchGrid = async () => {
     dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
+  };
+
+  useEffect(() => {
+    fetchGrid();
   }, [dispatch]);
 
-  const onRefreshGrid = () => dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
+  const onRefreshGrid = async () => {
+    await fetchGrid();
+  };
 
   const renderTableHead = () => (
     <thead>
