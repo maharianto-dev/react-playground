@@ -1,16 +1,21 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchTestCollection1 } from '../../redux/actions/testCollection1Actions';
+import { deleteTestCollection1 } from '../../redux/actions/TestCollection1/deleteTestCollection1Actions';
+import { fetchTestCollection1 } from '../../redux/actions/TestCollection1/testCollection1Actions';
 import Loading from '../Loading/Loading';
 
 import styles from './TestCollection1.module.css';
 
 const TestCollection1 = () => {
+  const API_URL = 'http://localhost:5000/TestCollection1';
+
   const dispatch = useDispatch();
+
+  const [deletedId, setDeletedId] = useState('');
 
   const { testCollection1GridData, istestCollection1GridFetching, error } = useSelector(
     (state: any) => ({
@@ -20,12 +25,18 @@ const TestCollection1 = () => {
     })
   );
 
+  const { isLoadingDelete } = useSelector(
+    (state: any) => ({
+      isLoadingDelete: state.deleteTestCollection1.loading
+    })
+  );
+
   // const fetchGridData = async (url:string) => {
   //   const response = await dispatch(fetchTestCollection1(url));
   // };
 
   const fetchGrid = async () => {
-    dispatch(fetchTestCollection1('http://localhost:5000/TestCollection1'));
+    dispatch(fetchTestCollection1(API_URL));
   };
 
   useEffect(() => {
@@ -39,6 +50,7 @@ const TestCollection1 = () => {
   const renderTableHead = () => (
     <thead>
       <tr className="table-primary">
+        <th>Actions</th>
         <th>No.</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -46,8 +58,33 @@ const TestCollection1 = () => {
     </thead>
   );
 
+  useEffect(() => {
+    if (!isLoadingDelete && deletedId !== '') {
+      console.log('succesfully deleted id: ', deletedId);
+      fetchGrid();
+    }
+  }, [isLoadingDelete]);
+
+  const deleteGridRow = async (id: string) => {
+    setDeletedId(id);
+    dispatch(deleteTestCollection1(API_URL, id));
+  };
+
+  const onDeleteRow = async (object: any) => {
+    await deleteGridRow(object.id);
+  };
+
+  const renderActionButtons = (object: any) => (
+    <>
+      <button type="button" className="btn btn-sm btn-danger" onClick={() => onDeleteRow(object)}>Delete</button>
+    </>
+  );
+
   const renderTableRow = ((object: any, ii: number) => (
     <>
+      <td>
+        {renderActionButtons(object)}
+      </td>
       <td>{ii + 1}</td>
       <td>{object.firstName}</td>
       <td>{object.lastName}</td>
