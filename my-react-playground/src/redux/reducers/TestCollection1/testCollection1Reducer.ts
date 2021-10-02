@@ -2,7 +2,7 @@ import {
   FETCH_TEST_COLLECTION1_BEGIN,
   FETCH_TEST_COLLECTION1_SUCCESS,
   FETCH_TEST_COLLECTION1_FAILURE
-} from '../actions/testCollection1Actions';
+} from '../../actions/TestCollection1/testCollection1Actions';
 
 const initialState = {
   data: [],

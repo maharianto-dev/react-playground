@@ -1,7 +1,7 @@
 import React from 'react';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import styles from './NavBar.module.css';
-import jnlogo from '../../assets/JN.png';
+import jnlogo from '../../../assets/JN.png';
 
 const NavBar = () => {
   const navbarText = <h3>My React Playground</h3>;

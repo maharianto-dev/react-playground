@@ -49,5 +49,6 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
-  }
+  },
+  "ignorePatterns": "**/*.test.tsx"
 }

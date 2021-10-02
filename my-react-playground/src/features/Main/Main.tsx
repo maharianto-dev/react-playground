@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from '../Home/Home';
-import Others from '../Others/Others';
-import TestCollection1 from '../TestCollection1/TestCollection1';
-import TestCollection1Add from '../TestCollection1/TestCollection1Add/TestCollection1Add';
+import Home from '../pages/Home/Home';
+import Others from '../pages/Others/Others';
+import TestCollection1 from '../pages/TestCollection1/TestCollection1';
+import TestCollection1Add from '../pages/TestCollection1/TestCollection1Add/TestCollection1Add';
 
 const Main = () => (
   /* The Switch decides which component to show based on the current URL. */

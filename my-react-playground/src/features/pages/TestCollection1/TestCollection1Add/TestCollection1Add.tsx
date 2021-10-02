@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addTestCollection1 } from '../../../redux/actions/addTestCollection1Actions';
+import { addTestCollection1 } from '../../../../redux/actions/TestCollection1/addTestCollection1Actions';
 import styles from './TestCollection1Add.module.css';
 
 interface InsertedData {

@@ -27,7 +27,7 @@ namespace react_playground_backend.Controllers
             return await _testCollection1Service.Get();
         }
 
-        [HttpGet("{id}", Name = "GetTestCollection1")]
+        [HttpGet("{id:length(24)}", Name = "GetTestCollection1")]
         public async Task<ActionResult<TestCollection1>> GetById(string id) {
             return await _testCollection1Service.GetById(id);
         }
@@ -38,6 +38,20 @@ namespace react_playground_backend.Controllers
             _testCollection1Service.Create(testCollection1);
 
             return CreatedAtRoute("GetTestCollection1", new { id = testCollection1.Id.ToString() }, testCollection1);
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public ActionResult<TestCollection1> Delete(string id)
+        {
+            var testCollection1 = _testCollection1Service.GetById(id);
+
+            if (testCollection1 == null)
+            {
+                return NotFound();
+            }
+            _testCollection1Service.RemoveById(id);
+
+            return NoContent();
         }
     }
 }

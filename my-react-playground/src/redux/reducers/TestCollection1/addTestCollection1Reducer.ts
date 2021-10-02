@@ -2,7 +2,7 @@ import {
   ADD_TEST_COLLECTION1_BEGIN,
   ADD_TEST_COLLECTION1_SUCCESS,
   ADD_TEST_COLLECTION1_FAILURE
-} from '../actions/addTestCollection1Actions';
+} from '../../actions/TestCollection1/addTestCollection1Actions';
 
 const initialState = {
   data: [],

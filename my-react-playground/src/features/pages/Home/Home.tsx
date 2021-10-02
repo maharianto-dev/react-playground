@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Counter } from '../counter/Counter';
 import './Home.css';
-import logo from '../../logo.svg';
+import logo from '../../../logo.svg';
+import ToastNotification from '../../ui/ToastNotification/ToastNotification';
 
 const Home = () => (
   <div className="{Home}">
@@ -19,10 +20,11 @@ const Home = () => (
         </button>
       </Link>
       <Link to="/testcollection1">
-        <button type="button" className="btn btn-primary">
+        <button type="button" className="btn btn-primary mb-1">
           Go to Test Collection 1
         </button>
       </Link>
+      <ToastNotification />
       <span>
         <span>Learn </span>
         <a
