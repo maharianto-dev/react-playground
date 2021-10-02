@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import counterReducer from '../features/counter/counterSlice';
+import counterReducer from '../features/pages/counter/counterSlice';
 
 import backendAPIReducer from './backendAPI/backendAPI.reducer';
 import addTestCollection1Reducer from './reducers/TestCollection1/addTestCollection1Reducer';

@@ -4,9 +4,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteTestCollection1 } from '../../redux/actions/TestCollection1/deleteTestCollection1Actions';
-import { fetchTestCollection1 } from '../../redux/actions/TestCollection1/testCollection1Actions';
-import Loading from '../Loading/Loading';
+import { deleteTestCollection1 } from '../../../redux/actions/TestCollection1/deleteTestCollection1Actions';
+import { fetchTestCollection1 } from '../../../redux/actions/TestCollection1/testCollection1Actions';
+import Loading from '../../ui/Loading/Loading';
 
 import styles from './TestCollection1.module.css';
 
