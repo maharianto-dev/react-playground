@@ -15,18 +15,27 @@ const ToastNotification: FC<{ notificationMessage: string }> = ({ notificationMe
     }
   }, [notificationMessage]);
 
+  const closeNotification = (message: string, index: number): void => {
+    console.log(`closing: ${message} on index: ${index}`);
+
+    setNotificationList((prevState: string[]) => prevState.filter((item) => item !== message));
+  };
+
   const renderToast = notificationList.map((message, index) => (
-    <Toast key={index} bg="info" delay={1000} autohide>
-      <Toast.Header>
-        <img
-          src="holder.js/20x20?text=%20"
-          className="rounded me-2"
-          alt=""
-        />
-        <strong className="me-auto">Notification</strong>
-      </Toast.Header>
-      <Toast.Body>{message}</Toast.Body>
-    </Toast>
+    <>
+      <p>{index}</p>
+      <Toast key={index} onClose={() => closeNotification(message, index)} bg="info" delay={5000} autohide>
+        <Toast.Header>
+          <img
+            src="holder.js/20x20?text=%20"
+            className="rounded me-2"
+            alt=""
+          />
+          <strong className="me-auto">Notification</strong>
+        </Toast.Header>
+        <Toast.Body>{message}</Toast.Body>
+      </Toast>
+    </>
   ));
 
   const renderToastContainer = () => {
