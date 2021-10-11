@@ -1,16 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Counter } from '../counter/Counter';
 import './Home.css';
 import logo from '../../../logo.svg';
-import ToastNotification from '../../ui/ToastNotification/ToastNotification';
 
 const Home = () => {
-  const [notificationMessage, setnotificationMessage] = useState(null as unknown as string);
-
   const onHandleShowNewToast = () => {
-    setnotificationMessage(Math.random().toString());
+    toast.success(Math.random().toString(), { theme: 'colored' });
   };
 
   const notificationButton = (
@@ -41,7 +39,6 @@ const Home = () => {
           </button>
         </Link>
         {notificationButton}
-        <ToastNotification notificationMessage={notificationMessage} />
         <span>
           <span>Learn </span>
           <a
